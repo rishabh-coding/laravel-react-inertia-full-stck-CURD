@@ -18,43 +18,19 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-interface LinkProps {
-    active: boolean;
-    label: string;
-    url: string;
-};
 
 
-interface Product {
+
+interface CategoryProps {
     id: number,
     name: string,
     description: string,
-    price: number,
-    featured_image: string,
-    featured_image_original_name: string,
+    image: string,
     created_at: string,
 };
-interface CategoryPagination {
-    data: Product[];
-    links: LinkProps[];
-    from: number;
-    to: number;
-    total: number;
-};
-
-interface FillterProps {
-    search: string,
-    perPage: string,
-};
-
-
-
 
 interface IndexProps {
-    categories: CategoryPagination;
-    fillters: FillterProps,
-    totalCount: number,
-    fillteredCount: number,
+    categories: CategoryProps[];
 };
 
 interface flashProps extends Record<string, any> {
@@ -68,7 +44,6 @@ interface flashProps extends Record<string, any> {
 
 
 export default function Index({ categories }: IndexProps) {
-    console.log(categories)
 
     const { flash } = (usePage<{ flash?: { success?: string; error?: string } }>().props);
     const flashMessage = flash?.success || flash?.error;
@@ -211,8 +186,7 @@ export default function Index({ categories }: IndexProps) {
                     <CustomTable
                         columns={CategoryTableConfig.Columns}
                         actions={CategoryTableConfig.actions}
-                        data={categories.data}
-                        from={categories.from}
+                        data={categories}
                         onView={(category) => openModel('view', category)}
                         onEdit={(category) => openModel('edit', category)}
                         handleDeleteCategory={handleDeleteCategory}

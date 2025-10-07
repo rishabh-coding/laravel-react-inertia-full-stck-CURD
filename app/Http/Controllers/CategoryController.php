@@ -17,17 +17,13 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate(10)->withQueryString();
-
-        $categories->getCollection()->transform(fn($category) => [
+        $categories = Category::latest()->get()->map(fn($category) => [
             'id' => $category->id,
             'name' => $category->name,
             'description' => $category->description,
             'image' => $category->featured_image,
             'created_at' => $category->created_at->format('d M Y'),
-        ]);
-
-        $categories->setCollection($transformed);
+        ])->all();
 
         return Inertia::render('categories/index', [
             'categories' => $categories,

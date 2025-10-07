@@ -28,7 +28,6 @@ interface CustomTableProps {
     columns: TableColumn[],
     actions: ActionConfig[],
     data: TableRow[],
-    from: number,
     onDelete: (id: number, route: string) => void,
     onView: (row: TableRow) => void,
     onEdit: (row: TableRow) => void,
@@ -36,7 +35,7 @@ interface CustomTableProps {
     isModel: boolean,
 }
 
-export default function CustomTable({ columns, actions, data, from, onDelete, onView, onEdit, handleDeleteCategory, isModel }: CustomTableProps) {
+export default function CustomTable({ columns, actions, data,  onDelete, onView, onEdit, handleDeleteCategory, isModel }: CustomTableProps) {
 
     // URL helper
     const getProductRoute = (route: string, id: number | string) => {
@@ -58,7 +57,7 @@ export default function CustomTable({ columns, actions, data, from, onDelete, on
     const renderActionButtons = (row: TableRow) => {
 
         return (
-            <div className="flex">
+            <div className="flex items-center justify-center">
                 {actions.map((action, index) => {
                     const IconComponent = LucidIcons[action.icon] as React.ElementType;
 
@@ -131,7 +130,7 @@ export default function CustomTable({ columns, actions, data, from, onDelete, on
                             data.map((row, index) => (
                                 <tr key={index} className='text-sm'>
 
-                                    <td className='px-4 py-1 border text-center'>{from + index}</td>
+                                    <td className='px-4 py-1 border text-center'>{index+1}</td>
                                     {columns.map((col) => (
                                         <td key={col.key} className='px-4 py-1 border text-center'>
                                             {col.isImage && row[col.key] ? (
