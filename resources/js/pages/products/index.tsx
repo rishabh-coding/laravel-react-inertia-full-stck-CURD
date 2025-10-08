@@ -10,6 +10,7 @@ import Pagination from '@/components/ui/pagination';
 import { Input } from '@/components/ui/input';
 import CustomTable from '@/components/custom-table';
 import { ProductTableConfig } from '@/config/tables/product-table';
+import { route } from 'ziggy-js';
 
 
 
@@ -123,7 +124,7 @@ export default function Index({ products, fillters, totalCount, fillteredCount }
         });
     };
     //handle delete
-    const handleDelete = (id: number, route: string) => {
+    const handleDelete = (route: string) => {
         if (confirm('Are you sure you want to delete this product?')) {
             router.delete(route, {
                 preserveScroll: true,
@@ -174,7 +175,7 @@ export default function Index({ products, fillters, totalCount, fillteredCount }
                     {/* add product button */}
                     <div className='ml-auto'>
 
-                        <Link as='button' href={create()}
+                        <Link as='button' href={route('products.create')}
                             className='flex items-center bg-black text-white px-4 py-2 text-sm rounded-lg cursor-pointer hover:opacity-50'>
                             <CirclePlus size={18} className='me-1' />Add Product
                         </Link>

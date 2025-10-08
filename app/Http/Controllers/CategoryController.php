@@ -21,7 +21,7 @@ class CategoryController extends Controller
             'id' => $category->id,
             'name' => $category->name,
             'description' => $category->description,
-            'image' => $category->featured_image,
+            'image' => $category->image,
             'created_at' => $category->created_at->format('d M Y'),
         ])->all();
 

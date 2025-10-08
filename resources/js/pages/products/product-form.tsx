@@ -60,12 +60,12 @@ export default function ProductForm({ ...props }) {
         e.preventDefault();
         if (isEdit) {
             // types mismatch se toString use kiya put ek string url leta hai
-            post(update(product.id), {
+            post(route('products.update', product.id), {
                 forceFormData: true,
                 onSuccess: () => reset(),
             })
         } else {
-            post(store(), {
+            post(route('products.store'), {
                 onSuccess: () => reset(),
             });
             console.log('data', data);
@@ -161,7 +161,7 @@ export default function ProductForm({ ...props }) {
                                     {(isView || isEdit) && product.featured_image && (
                                         <div className='grid gap-2'>
                                             <Label htmlFor='featured_image'>Current Featured Image</Label>
-                                            <img src={`/storage/${product.featured_image}`} alt='Featured Image' className='h-40 w-40 rounded-lg border-black border-1' />
+                                            <img src={`/storage/${product.featured_image}`} alt='Featured Image' className='h-40 w-40 object-fill rounded-lg border-black border-1' />
                                         </div>
                                     )}
 

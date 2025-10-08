@@ -2,6 +2,7 @@
 import { Button } from "./ui/button";
 import { Link, router } from "@inertiajs/react";
 import * as LucidIcons from 'lucide-react';
+import { route } from "ziggy-js";
 
 
 interface TableColumn {
@@ -15,7 +16,7 @@ interface TableColumn {
 interface ActionConfig {
     label: string,
     icon: keyof typeof LucidIcons,
-    route: 'show' | 'edit' ,
+    route: 'show' | 'edit',
     className: string,
 
 }
@@ -28,31 +29,14 @@ interface CustomTableProps {
     columns: TableColumn[],
     actions: ActionConfig[],
     data: TableRow[],
-    onDelete: (id: number, route: string) => void,
+    onDelete: (route: string) => void,
     onView: (row: TableRow) => void,
     onEdit: (row: TableRow) => void,
     handleDeleteCategory: (id: number) => void,
     isModel: boolean,
 }
 
-export default function CustomTable({ columns, actions, data,  onDelete, onView, onEdit, handleDeleteCategory, isModel }: CustomTableProps) {
-
-    // URL helper
-    const getProductRoute = (route: string, id: number | string) => {
-        switch (route) {
-            case 'show':
-                return `/products/${id}`;
-            case 'edit':
-                return `/products/${id}/edit`;
-            case 'delete':
-                return `/products/${id}`;
-            default:
-                return '/products';
-        }
-    };
-
-
-
+export default function CustomTable({ columns, actions, data, onDelete, onView, onEdit, isModel }: CustomTableProps) {
 
     const renderActionButtons = (row: TableRow) => {
 
@@ -80,25 +64,17 @@ export default function CustomTable({ columns, actions, data,  onDelete, onView,
                                 </Button>
                             );
                         }
-                        // Delete functionality for model
-                        if (action.label === 'Delete') {
-                            return (
-                                <Button key={index} className={action.className} onClick={() => handleDeleteCategory(row.id)}>
-                                    <IconComponent size={18} />
-                                </Button>
-                            );
-                        }
                     }
                     // for delete
                     if (action.label === 'Delete') {
                         return (
-                            <Button key={index} className={action.className} onClick={() => onDelete(row.id, getProductRoute(action.route, row.id))}>
+                            <Button key={index} className={action.className} onClick={() => onDelete(route(action.route, row.id))}>
                                 <IconComponent size={18} />
                             </Button>
                         );
                     }
                     return (
-                        <Link key={index} as='button' href={getProductRoute(action.route, row.id)} className={action.className}>
+                        <Link key={index} as='button' href={route(action.route, row.id)} className={action.className}>
                             <IconComponent size={18} />
                         </Link>
                     );
@@ -128,35 +104,40 @@ export default function CustomTable({ columns, actions, data,  onDelete, onView,
                     <tbody>
                         {data.length > 0 ? (
                             data.map((row, index) => (
-                                <tr key={index} className='text-sm'>
 
-                                    <td className='px-4 py-1 border text-center'>{index+1}</td>
-                                    {columns.map((col) => (
-                                        <td key={col.key} className='px-4 py-1 border text-center'>
-                                            {col.isImage && row[col.key] ? (
-                                                <div className='flex items-center justify-center'>
-                                                    <div><img src={'storage/' + row[col.key]} alt={row.name} className='h-16 w-fit rounded-lg object-cover' /></div>
-                                                </div>
-                                            ) : col.isAction ? (
-                                                renderActionButtons(row)
-                                            ) : (
-                                                row[col.key]
-                                            )}
-                                        </td>
-                                    ))}
+                                < tr key={index} className='text-sm' >
+
+                                    <td className='px-4 py-1 border text-center'>{index + 1}</td>
+                                    {
+                                        columns.map((col) => (
+                                            <td key={col.key} className='px-4 py-1 border text-center'>
+                                                {col.isImage && row[col.key] ? (
+                                                    <div className='flex items-center justify-center'>
+                                                        <div><img src={'/storage/' + row[col.key]} alt={row.name} className='h-16 w-fit rounded-lg object-cover' /></div>
+                                                    </div>
+
+                                                ) : col.isAction ? (
+                                                    renderActionButtons(row)
+                                                ) : (
+                                                    row[col.key]
+                                                )}
+                                            </td>
+                                        ))
+                                    }
 
                                 </tr>
                             ))
+
                         ) : (
                             <tr>
-                                <td colSpan={7} className='text-center py-4 text-sm font-bold text-red-600'>No Products Found!</td>
+                                <td colSpan={7} className='text-center py-4 text-sm font-bold text-red-600'>No {!isModel ? 'Products' : 'Categories'} Found!</td>
                             </tr>
                         )}
 
 
                     </tbody>
                 </table>
-            </div>
+            </div >
         </>
     )
 }

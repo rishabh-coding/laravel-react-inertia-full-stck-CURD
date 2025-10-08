@@ -9,6 +9,6 @@ export const CategoryTableConfig = {
     actions: [
         { label: 'View', icon: 'Eye',  className: 'bg-sky-600 text-white p-1.5 rounded-lg cursor-pointer hover:opacity-50' },
         { label: 'Edit', icon: 'Pencil',  className: 'ms-2 bg-green-600 text-white p-1.5 rounded-lg cursor-pointer hover:opacity-50' },
-        { label: 'Delete', icon: 'Trash2', route:'delete',  className: 'ms-2 bg-red-600 text-white p-1.5 rounded-lg cursor-pointer hover:opacity-50' },
+        { label: 'Delete', icon: 'Trash2', route:'categories.destroy',  className: 'ms-2 bg-red-600 text-white p-1.5 rounded-lg cursor-pointer hover:opacity-50' },
     ],
 }

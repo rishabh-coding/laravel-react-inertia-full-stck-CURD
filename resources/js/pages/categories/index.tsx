@@ -10,6 +10,7 @@ import CategoryController from '@/actions/App/Http/Controllers/CategoryControlle
 import { useState } from 'react';
 import CustomToast from '@/components/custom-toast';
 import { toast } from '@/components/custom-toast';
+import { route } from 'ziggy-js';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -67,7 +68,7 @@ export default function Index({ categories }: IndexProps) {
         // Edit mode
         if (mode === 'edit' && selectedCategory) {
             data._method = 'PUT';
-            post(CategoryController.update(selectedCategory.id), {
+            post(route('categories.update',selectedCategory.id), {
                 forceFormData: true,
                 onSuccess: (response: { props: flashProps }) => {
                     const successMsg = response.props.flash?.success || 'Category updated successfully';
@@ -82,7 +83,7 @@ export default function Index({ categories }: IndexProps) {
             })
         }
         else {
-            post(CategoryController.store(), {
+            post(route('categories.store'), {
                 onSuccess: (response: { props: flashProps }) => {
                     const successMsg = response.props.flash?.success || 'Category created successfully';
                     toast.success(successMsg);
@@ -98,9 +99,10 @@ export default function Index({ categories }: IndexProps) {
     }
 
     //handle delete
-    const handleDeleteCategory = (id: number) => {
+    const handleDelete = (route:string) => {
+        console.log(route)
         if (confirm('Are you sure you want to delete this product?')) {
-            router.delete(`/categories/${id}`, {
+            router.delete(route, {
                 preserveScroll: true,
                 onSuccess: (response: { props: flashProps }) => {
                     const successMsg = response.props.flash?.success || 'Category updated successfully';
@@ -189,7 +191,7 @@ export default function Index({ categories }: IndexProps) {
                         data={categories}
                         onView={(category) => openModel('view', category)}
                         onEdit={(category) => openModel('edit', category)}
-                        handleDeleteCategory={handleDeleteCategory}
+                        onDelete={handleDelete}
                         isModel={true}
                     />
                 </div>
