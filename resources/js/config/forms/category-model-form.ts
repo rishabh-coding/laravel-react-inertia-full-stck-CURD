@@ -9,8 +9,8 @@ export const CategoryModelFormConfig = {
         label: 'Add Category',
         className: 'bg-teal-600 text-white rounded-lg hover:bg-teal-700 cursor-pointer',
         icon: CirclePlus,
-        type: 'button',
-        variant: 'default',
+        type: 'button' as const,
+        variant: 'default' as const,
     },
     fields: [
         {
@@ -54,17 +54,17 @@ export const CategoryModelFormConfig = {
         {
             key: 'cancel',
             id: 'cancel',
-            type: 'button',
+            type: 'button' as const,
             label: 'Cancel',
-            variant: 'ghost',
+            variant: 'ghost' as const,
             className: 'cursor-pointer',
         },
         {
             key: 'submit',
             id: 'submit',
-            type: 'submit',
+            type: 'submit' as const,
             label: 'Save Category',
-            variant: 'default',
+            variant: 'default' as const,
             className: 'cursor-pointer',
         },
     ],

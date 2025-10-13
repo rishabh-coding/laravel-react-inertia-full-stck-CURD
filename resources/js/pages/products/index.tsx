@@ -255,7 +255,7 @@ export default function Index({ products, fillters, totalCount, fillteredCount }
                 </div>
                 {/* Custom Table Component */}
 
-                <CustomTable columns={ProductTableConfig.Columns} actions={ProductTableConfig.actions} data={products.data} from={products.from} onDelete={handleDelete} />
+                <CustomTable columns={ProductTableConfig.Columns} actions={ProductTableConfig.actions} data={products.data} onDelete={handleDelete} />
 
                 <Pagination products={products} perPage={data.perPage} onPerPageChange={handlePerPageChance} totalCount={totalCount} fillteredCount={fillteredCount} search={data.search} />
             </div>

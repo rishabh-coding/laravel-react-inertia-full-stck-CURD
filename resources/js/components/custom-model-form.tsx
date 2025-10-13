@@ -18,7 +18,7 @@ interface AddButtonProps {
     id: string;
     label: string;
     className: string;
-    icon: string;
+    icon: React.ForwardRefExoticComponent<React.SVGProps<SVGSVGElement> & React.RefAttributes<SVGSVGElement>> | string;
     type: 'button' | 'submit' | 'reset' | undefined;
     variant: 'default' | 'outline' | 'ghost' | 'link' | 'destructive' | undefined;
 }

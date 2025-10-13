@@ -16,7 +16,7 @@ interface TableColumn {
 interface ActionConfig {
     label: string,
     icon: keyof typeof LucidIcons,
-    route: 'show' | 'edit',
+    route: string,
     className: string,
 
 }
@@ -30,10 +30,10 @@ interface CustomTableProps {
     actions: ActionConfig[],
     data: TableRow[],
     onDelete: (route: string) => void,
-    onView: (row: TableRow) => void,
-    onEdit: (row: TableRow) => void,
-    handleDeleteCategory: (id: number) => void,
-    isModel: boolean,
+    onView?: (row: TableRow) => void,
+    onEdit?: (row: TableRow) => void,
+    handleDeleteCategory?: (id: number) => void,
+    isModel?: boolean,
 }
 
 export default function CustomTable({ columns, actions, data, onDelete, onView, onEdit, isModel }: CustomTableProps) {

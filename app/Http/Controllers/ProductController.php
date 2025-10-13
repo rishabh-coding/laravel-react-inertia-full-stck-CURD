@@ -91,7 +91,8 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @return \Illuminate\Http\RedirectResponse
-     *
+     *  @param \Illuminate\Http\Request $request
+     * @param \App\Models\Product $product
 
      * @var \App\Http\Requests\ProductFormRequest $request
      */
@@ -99,7 +100,6 @@ class ProductController extends Controller
     {
 
         try {
-            $product= $request->validated();
             $featuredImage = null;
             $featuredImageOriginalName = null;
 
@@ -110,11 +110,18 @@ class ProductController extends Controller
             }
             $product = Product::create([
 
-                'name' => $request->name, //linting problem hai vs code ki can use $product['name];
+                'name' => $request->name,       //linting problem hai vs code ki can use $product['name];
                 'description' => $request->description,
                 'price' => $request->price,
                 'featured_image' => $featuredImage,
                 'featured_image_original_name' => $featuredImageOriginalName,
+
+
+                // 'name' => $product['name'],
+                // 'description' => $product['description'],
+                // 'price' => $product['price'],
+                // 'featured_image' => $featuredImage,
+                // 'featured_image_original_name' => $featuredImageOriginalName,
             ]);
             if ($product) {
                 return redirect()->route('products.index')->with('success', 'Product created successfully.');
@@ -150,6 +157,8 @@ class ProductController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *  @param \Illuminate\Http\Request $request
+     * @param \App\Models\Product $product
      */
     public function update(ProductFormRequest $request, Product $product)
     {
