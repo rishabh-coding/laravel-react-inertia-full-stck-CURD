@@ -2,9 +2,9 @@ import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link, router, useForm, usePage } from '@inertiajs/react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { ChangeEvent, useEffect, useState } from 'react';
-import { create, destroy, edit, index, show } from '@/routes/products';
-import { CirclePlus, Eye, Pencil, Trash2, X } from 'lucide-react';
+import {  useEffect, useState } from 'react';
+import { index } from '@/routes/products';
+import { CirclePlus, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Pagination from '@/components/ui/pagination';
 import { Input } from '@/components/ui/input';
@@ -62,7 +62,7 @@ export default function Index({ products, fillters, totalCount, fillteredCount }
 
     const { flash } = (usePage<{ flash?: { success?: string; error?: string } }>().props);
     const flashMessage = flash?.success || flash?.error;
-    const [message, setMessage]=useState('');
+    // const [message, setMessage]=useState('');
     const [showAlert, setShowAlert] = useState(flashMessage ? true : false );
 
     console.log(products)
@@ -128,15 +128,15 @@ export default function Index({ products, fillters, totalCount, fillteredCount }
         if (confirm('Are you sure you want to delete this product?')) {
             router.delete(route, {
                 preserveScroll: true,
-                onSuccess:(page)=>{
+                onSuccess:()=>{
                     // const message=page.props.flash?.success
-                     setMessage(flashMessage || 'Product deleted successfully');
+                    //  setMessage(flashMessage || 'Product deleted successfully');
                      setShowAlert(true);
 
                 },
-                  onError:(page)=>{
+                  onError:()=>{
                     // const message=page.props.flash?.success
-                     setMessage(flashMessage || 'Unable to delete product. Please try again.');
+                    //  setMessage(flashMessage || 'Unable to delete product. Please try again.');
                      setShowAlert(true);
                 },
             });

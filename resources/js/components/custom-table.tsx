@@ -1,6 +1,6 @@
 
 import { Button } from "./ui/button";
-import { Link, router } from "@inertiajs/react";
+import { Link,  } from "@inertiajs/react";
 import * as LucidIcons from 'lucide-react';
 import { route } from "ziggy-js";
 
@@ -91,7 +91,7 @@ export default function CustomTable({ columns, actions, data, onDelete, onView, 
                         <tr className='bg-gray-700 text-white text-sm'>
                             <th className='p-2 border'>#</th>
 
-                            {columns.map((column, index) => (
+                            {columns.map((column) => (
                                 <th key={column.key} className={column.className}>
                                     {column.label}
                                 </th>

@@ -1,12 +1,10 @@
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
-import { Head, Link, router, useForm, usePage } from '@inertiajs/react';
-import { CirclePlus, Eye, Pencil, Trash2, X } from 'lucide-react';
+import { Head,  router, useForm } from '@inertiajs/react';
 import CustomTable from '@/components/custom-table';
 import { CategoryTableConfig } from '@/config/tables/category';
 import CustomModelForm from '@/components/custom-model-form';
 import { CategoryModelFormConfig } from '@/config/forms/category-model-form';
-import CategoryController from '@/actions/App/Http/Controllers/CategoryController';
 import { useState } from 'react';
 import CustomToast from '@/components/custom-toast';
 import { toast } from '@/components/custom-toast';
@@ -46,8 +44,8 @@ interface flashProps extends Record<string, any> {
 
 export default function Index({ categories }: IndexProps) {
 
-    const { flash } = (usePage<{ flash?: { success?: string; error?: string } }>().props);
-    const flashMessage = flash?.success || flash?.error;
+    // const { flash } = (usePage<{ flash?: { success?: string; error?: string } }>().props);
+    // const flashMessage = flash?.success || flash?.error;
     const [modelOpen, setModelOpen] = useState(false);
     const [mode, setMode] = useState<'create' | 'view' | 'edit'>('create');
     const [selectedCategory, setSelectedCategory] = useState<any>(null);

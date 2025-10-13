@@ -5,9 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CustomTextarea } from '@/components/ui/custom-textarea';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
-import products, { create, index, store, update, } from '@/routes/products';
+import { index} from '@/routes/products';
 
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link, useForm, } from '@inertiajs/react';
@@ -45,7 +44,7 @@ export default function ProductForm({ ...props }) {
 
 
     });
-    const { data, setData, post, put, processing, errors, reset } = form;
+    const { data, setData, post,  processing, errors, reset } = form;
     // const { data, setData, post, processing, errors, reset } = useForm({
     //     name: product?.name || '',
     //     description: product?.description || '',

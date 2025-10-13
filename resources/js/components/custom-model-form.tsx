@@ -53,7 +53,7 @@ interface CustomModelFormProps {
     fields: FieldsProps[];
     buttons: ButtonProps[];
     data: Record<string, any>;
-    setData: (name: string, value: any) => void;
+    setData: (name: string, value: unknown) => void;
     errors: Record<string, string>;
     processing: boolean;
     handleSubmit: (data: any) => void;
