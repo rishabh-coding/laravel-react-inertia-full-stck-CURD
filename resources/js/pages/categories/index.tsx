@@ -1,6 +1,6 @@
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
-import { Head,  router, useForm } from '@inertiajs/react';
+import { Head, router, useForm } from '@inertiajs/react';
 import CustomTable from '@/components/custom-table';
 import { CategoryTableConfig } from '@/config/tables/category';
 import CustomModelForm from '@/components/custom-model-form';
@@ -31,7 +31,7 @@ interface CategoryProps {
 interface IndexProps {
     categories: CategoryProps[];
 };
-
+//eslint-disable-next-line @typescript-eslint/no-explicit-any
 interface flashProps extends Record<string, any> {
     flash?: {
         success?: string,
@@ -48,6 +48,7 @@ export default function Index({ categories }: IndexProps) {
     // const flashMessage = flash?.success || flash?.error;
     const [modelOpen, setModelOpen] = useState(false);
     const [mode, setMode] = useState<'create' | 'view' | 'edit'>('create');
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [selectedCategory, setSelectedCategory] = useState<any>(null);
     const [previewImage, setPreviewImage] = useState<string | null>(null);
 
@@ -66,7 +67,7 @@ export default function Index({ categories }: IndexProps) {
         // Edit mode
         if (mode === 'edit' && selectedCategory) {
             data._method = 'PUT';
-            post(route('categories.update',selectedCategory.id), {
+            post(route('categories.update', selectedCategory.id), {
                 forceFormData: true,
                 onSuccess: (response: { props: flashProps }) => {
                     const successMsg = response.props.flash?.success || 'Category updated successfully';
@@ -97,7 +98,7 @@ export default function Index({ categories }: IndexProps) {
     }
 
     //handle delete
-    const handleDelete = (route:string) => {
+    const handleDelete = (route: string) => {
         console.log(route)
         if (confirm('Are you sure you want to delete this product?')) {
             router.delete(route, {
@@ -138,7 +139,7 @@ export default function Index({ categories }: IndexProps) {
     }
 
     // Open model
-
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
     const openModel = (mode: 'create' | 'view' | 'edit', category?: any) => {
         setMode(mode);
         console.log('category', category, mode);

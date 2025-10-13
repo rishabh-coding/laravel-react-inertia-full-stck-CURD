@@ -52,10 +52,12 @@ interface CustomModelFormProps {
     description: string;
     fields: FieldsProps[];
     buttons: ButtonProps[];
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
     data: Record<string, any>;
     setData: (name: string, value: unknown) => void;
     errors: Record<string, string>;
     processing: boolean;
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
     handleSubmit: (data: any) => void;
     open: boolean;
     onOpenChange: (open: boolean) => void;
